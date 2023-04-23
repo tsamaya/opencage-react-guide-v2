@@ -12,8 +12,7 @@ const MAP_TAB = 'MAP_TAB';
 const JSON_TAB = 'JSON_TAB';
 
 function GeocodingResults(props) {
-
-  const [activeTab, setActiveTab] = useState(RESULT_TAB)
+  const [activeTab, setActiveTab] = useState(RESULT_TAB);
 
   function renderTab(title, tab, icon, activeTab) {
     return (
@@ -22,7 +21,7 @@ function GeocodingResults(props) {
           href="/"
           onClick={(e) => {
             e.preventDefault();
-            setActiveTab( tab);
+            setActiveTab(tab);
           }}
         >
           <span className="icon is-small">

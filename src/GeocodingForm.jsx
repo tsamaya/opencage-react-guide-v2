@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './GeocodingForm.css';
 
 function GeocodingForm(props) {
-
   const [isLocating, setIsLocating] = useState(false);
   const [apikey, setApiKey] = useState('');
   const [query, setQuery] = useState('');
@@ -27,8 +26,8 @@ function GeocodingForm(props) {
       );
     });
     p.then((location) => {
-        setIsLocating(false);
-        setQuery(location.coords.latitude + ', ' + location.coords.longitude)
+      setIsLocating(false);
+      setQuery(location.coords.latitude + ', ' + location.coords.longitude);
     });
   }
 
@@ -37,7 +36,7 @@ function GeocodingForm(props) {
     props.onSubmit(apikey, query);
   }
 
-  const {isSubmitting} = props;
+  const { isSubmitting } = props;
 
   return (
     <div className="box form">
@@ -59,7 +58,7 @@ function GeocodingForm(props) {
               type="text"
               placeholder="YOUR-API-KEY"
               value={apikey}
-              onChange={(e)=>setApiKey(e.target.value)}
+              onChange={(e) => setApiKey(e.target.value)}
             />
           </div>
           <div className="help">
@@ -83,7 +82,7 @@ function GeocodingForm(props) {
               type="text"
               placeholder="location"
               value={query}
-              onChange={(e)=>setQuery(e.target.value)}
+              onChange={(e) => setQuery(e.target.value)}
             />
             <div className="help">
               Address, place name

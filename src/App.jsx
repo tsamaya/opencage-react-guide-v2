@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import Header from './Header'
+import React, { useState } from 'react';
+import Header from './Header';
 import GeocodingForm from './GeocodingForm';
 import GeocodingResults from './GeocodingResults';
 
@@ -12,34 +12,34 @@ function App() {
     <div>
       <Header />
       <div className="columns">
-      <div className="column is-one-third-desktop">
-            <GeocodingForm
+        <div className="column is-one-third-desktop">
+          <GeocodingForm
             isSubmitting={isSubmitting}
-            onSubmit={(apikey, query)=> {
+            onSubmit={(apikey, query) => {
               setIsSubmitting(true);
               console.log(apikey, query);
               opencage
-              .geocode({ key: apikey, q: query })
-              .then(response => {
-                console.log(response);
-                setResponse(response);
-              })
-              .catch((err) => {
-                console.error(err);
-                setResponse({});
-              }).finally(()=>{
-                setIsSubmitting(false);
-              });
-        
+                .geocode({ key: apikey, q: query })
+                .then((response) => {
+                  console.log(response);
+                  setResponse(response);
+                })
+                .catch((err) => {
+                  console.error(err);
+                  setResponse({});
+                })
+                .finally(() => {
+                  setIsSubmitting(false);
+                });
             }}
-            />
-          </div>
-          <div className="column">
-            <GeocodingResults response={response} />
-          </div>
+          />
+        </div>
+        <div className="column">
+          <GeocodingResults response={response} />
+        </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

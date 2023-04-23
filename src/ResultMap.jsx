@@ -11,8 +11,6 @@ const redIcon = L.icon({
 });
 
 function ResultMap(props) {
-
-
   const mapRef = useRef();
 
   useEffect(() => {
@@ -37,22 +35,11 @@ function ResultMap(props) {
     }
 
     map.fitBounds(layer.getBounds());
-
   }, []);
 
+  // if (this.state.map) return;
 
-    // if (this.state.map) return;
-
-
-  
-    return (
-      <div
-        ref={mapRef}
-        id="map"
-        data={props.data}
-      />
-    );
-  }
-
+  return <div ref={mapRef} id="map" data={props.data} />;
+}
 
 export default ResultMap;
