@@ -17,11 +17,11 @@ function App() {
             isSubmitting={isSubmitting}
             onSubmit={(apikey, query) => {
               setIsSubmitting(true);
-              console.log(apikey, query);
+              // console.log(apikey, query);
               opencage
                 .geocode({ key: apikey, q: query })
                 .then((response) => {
-                  console.log(response);
+                  // console.log(response);
                   setResponse(response);
                 })
                 .catch((err) => {

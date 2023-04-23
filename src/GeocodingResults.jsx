@@ -56,9 +56,9 @@ function GeocodingResults(props) {
         <ResultJSON response={props.response} />
       )}
       {/* MAP result */}
-      {/* {activeTab === MAP_TAB && results.length > 0 && (
+      {activeTab === MAP_TAB && results.length > 0 && (
         <ResultMap response={props.response} />
-      )} */}
+      )}
     </div>
   );
 }

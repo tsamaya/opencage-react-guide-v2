@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react';
-import L from 'leaflet';
+import React from 'react';
+import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
+
 // import Leaflet's CSS
 import 'leaflet/dist/leaflet.css';
 import './ResultMap.css';
@@ -10,36 +11,33 @@ const redIcon = L.icon({
   iconAnchor: [12, 40], // point of the icon which will correspond to marker's location
 });
 
+function MyLayer(props) {
+  return (
+    <div>
+      {props.response.results &&
+        props.response.results.map((e, i) => (
+          <Marker key={i} position={e.geometry}>
+            <Popup>
+              {i + 1} - {e.formatted}
+            </Popup>
+          </Marker>
+        ))}
+    </div>
+  );
+}
+
 function ResultMap(props) {
-  const mapRef = useRef();
+  const position = [40, 0];
 
-  useEffect(() => {
-    // creates the Leaflet map object
-    // it is called after the Map component mounts
-    const map = L.map(mapRef, {
-      center: [45, 2],
-      zoom: 4,
-    });
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
-
-    const layer = L.featureGroup().addTo(map);
-
-    const { results } = props.response;
-    for (let i = 0; i < results.length; i++) {
-      const marker = L.marker(results[i].geometry, { icon: redIcon });
-      marker.addTo(layer).bindPopup(i + 1 + ' - ' + results[i].formatted);
-    }
-
-    map.fitBounds(layer.getBounds());
-  }, []);
-
-  // if (this.state.map) return;
-
-  return <div ref={mapRef} id="map" data={props.data} />;
+  return (
+    <MapContainer id="map" center={position} zoom={2}>
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <MyLayer response={props.response} />
+    </MapContainer>
+  );
 }
 
 export default ResultMap;

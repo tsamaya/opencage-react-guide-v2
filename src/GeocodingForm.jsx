@@ -32,7 +32,7 @@ function GeocodingForm(props) {
   }
 
   function handleSubmit(event) {
-    console.log('Form was submitted with query: ', apikey, query);
+    // console.log('Form was submitted with query: ', apikey, query);
     props.onSubmit(apikey, query);
   }
 
