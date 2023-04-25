@@ -1,5 +1,11 @@
-import React from 'react';
-import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
+import React, { useEffect, useRef } from 'react';
+import {
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  FeatureGroup,
+} from 'react-leaflet';
 
 // import Leaflet's CSS
 import 'leaflet/dist/leaflet.css';
@@ -11,31 +17,36 @@ const redIcon = L.icon({
   iconAnchor: [12, 40], // point of the icon which will correspond to marker's location
 });
 
-function MyLayer(props) {
-  return (
-    <div>
-      {props.response.results &&
-        props.response.results.map((e, i) => (
-          <Marker key={i} position={e.geometry}>
-            <Popup>
-              {i + 1} - {e.formatted}
-            </Popup>
-          </Marker>
-        ))}
-    </div>
-  );
-}
-
 function ResultMap(props) {
+  const mapRef = useRef(null);
+  const groupRef = useRef(null);
+
   const position = [40, 0];
 
+  useEffect(() => {
+    const map = mapRef.current;
+    const group = groupRef.current;
+    if (map && group) {
+      map.fitBounds(group.getBounds());
+    }
+  }, [props]);
+
   return (
-    <MapContainer id="map" center={position} zoom={2}>
+    <MapContainer ref={mapRef} id="map" center={position} zoom={2}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <MyLayer response={props.response} />
+      <FeatureGroup ref={groupRef}>
+        {props.response.results &&
+          props.response.results.map((e, i) => (
+            <Marker key={i} position={e.geometry}>
+              <Popup>
+                {i + 1} - {e.formatted}
+              </Popup>
+            </Marker>
+          ))}
+      </FeatureGroup>
     </MapContainer>
   );
 }
