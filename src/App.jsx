@@ -25,7 +25,7 @@ function App() {
                   setResponse(response);
                 })
                 .catch((err) => {
-                  console.error(err);
+                  console.error(JSON.stringify(err));
                   setResponse({});
                 })
                 .finally(() => {
