@@ -3,7 +3,7 @@ import Header from './Header';
 import GeocodingForm from './GeocodingForm';
 import GeocodingResults from './GeocodingResults';
 
-// import * as opencage from 'opencage-api-client';
+// import * as opencage from 'opencage-api-client'; // alternative syntax for v1.x
 import opencage from 'opencage-api-client';
 
 function App() {
