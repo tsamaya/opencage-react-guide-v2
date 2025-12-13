@@ -13,8 +13,8 @@
     "classnames": "2.5.1",
     "leaflet": "1.9.4",
     "opencage-api-client": "2.1.0",
-    "react": "19.2.1",
-    "react-dom": "19.2.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
     "react-leaflet": "5.0.0"
   },
   "devDependencies": {
